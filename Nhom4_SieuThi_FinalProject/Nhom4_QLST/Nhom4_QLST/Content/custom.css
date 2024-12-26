@@ -1,0 +1,14 @@
+﻿/* File custom.css */
+.menu-link {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+    .menu-link:hover {
+        background-color: #f8f9fa; /* Màu nền sáng khi di chuột qua */
+        color: #343a40; /* Màu chữ tối khi di chuột qua */
+        text-decoration: none;
+    }

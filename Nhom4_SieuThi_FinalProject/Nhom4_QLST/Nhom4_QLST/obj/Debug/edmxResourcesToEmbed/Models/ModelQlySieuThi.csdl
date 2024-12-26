@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SieuThiNhoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="GiaoDich">
+    <Key>
+      <PropertyRef Name="MaGiaoDich" />
+    </Key>
+    <Property Name="MaGiaoDich" Type="Int32" Nullable="false" />
+    <Property Name="MaKhachHang" Type="Int32" />
+    <Property Name="MaSanPham" Type="Int32" />
+    <Property Name="MaNhanVien" Type="Int32" />
+    <Property Name="SoLuong" Type="Int32" />
+    <Property Name="NgayGiaoDich" Type="DateTime" Precision="3" />
+    <Property Name="TongTien" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="KhachHang" Relationship="Self.FK__GiaoDich__MaKhac__46E78A0C" FromRole="GiaoDich" ToRole="KhachHang" />
+    <NavigationProperty Name="NhanVien" Relationship="Self.FK__GiaoDich__MaNhan__48CFD27E" FromRole="GiaoDich" ToRole="NhanVien" />
+    <NavigationProperty Name="SanPham" Relationship="Self.FK__GiaoDich__MaSanP__47DBAE45" FromRole="GiaoDich" ToRole="SanPham" />
+  </EntityType>
+  <EntityType Name="KhachHang">
+    <Key>
+      <PropertyRef Name="MaKhachHang" />
+    </Key>
+    <Property Name="MaKhachHang" Type="Int32" Nullable="false" />
+    <Property Name="TenKhachHang" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SoDienThoai" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="GiaoDiches" Relationship="Self.FK__GiaoDich__MaKhac__46E78A0C" FromRole="KhachHang" ToRole="GiaoDich" />
+  </EntityType>
+  <EntityType Name="NhaCungCap">
+    <Key>
+      <PropertyRef Name="MaNhaCungCap" />
+    </Key>
+    <Property Name="MaNhaCungCap" Type="Int32" Nullable="false" />
+    <Property Name="TenNhaCungCap" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SoDienThoai" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SanPhams" Relationship="Self.FK__SanPham__MaNhaCu__440B1D61" FromRole="NhaCungCap" ToRole="SanPham" />
+  </EntityType>
+  <EntityType Name="NhanVien">
+    <Key>
+      <PropertyRef Name="MaNhanVien" />
+    </Key>
+    <Property Name="MaNhanVien" Type="Int32" Nullable="false" />
+    <Property Name="TenNhanVien" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ChucVu" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="LichLamViec" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Luong" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="GiaoDiches" Relationship="Self.FK__GiaoDich__MaNhan__48CFD27E" FromRole="NhanVien" ToRole="GiaoDich" />
+  </EntityType>
+  <EntityType Name="SanPham">
+    <Key>
+      <PropertyRef Name="MaSanPham" />
+    </Key>
+    <Property Name="MaSanPham" Type="Int32" Nullable="false" />
+    <Property Name="TenSanPham" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Gia" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="SoLuongTonKho" Type="Int32" />
+    <Property Name="MaNhaCungCap" Type="Int32" />
+    <NavigationProperty Name="GiaoDiches" Relationship="Self.FK__GiaoDich__MaSanP__47DBAE45" FromRole="SanPham" ToRole="GiaoDich" />
+    <NavigationProperty Name="NhaCungCap" Relationship="Self.FK__SanPham__MaNhaCu__440B1D61" FromRole="SanPham" ToRole="NhaCungCap" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK__GiaoDich__MaKhac__46E78A0C">
+    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+    <End Role="GiaoDich" Type="Self.GiaoDich" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="MaKhachHang" />
+      </Principal>
+      <Dependent Role="GiaoDich">
+        <PropertyRef Name="MaKhachHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GiaoDich__MaNhan__48CFD27E">
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+    <End Role="GiaoDich" Type="Self.GiaoDich" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="MaNhanVien" />
+      </Principal>
+      <Dependent Role="GiaoDich">
+        <PropertyRef Name="MaNhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GiaoDich__MaSanP__47DBAE45">
+    <End Role="SanPham" Type="Self.SanPham" Multiplicity="0..1" />
+    <End Role="GiaoDich" Type="Self.GiaoDich" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SanPham">
+        <PropertyRef Name="MaSanPham" />
+      </Principal>
+      <Dependent Role="GiaoDich">
+        <PropertyRef Name="MaSanPham" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SanPham__MaNhaCu__440B1D61">
+    <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="0..1" />
+    <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhaCungCap">
+        <PropertyRef Name="MaNhaCungCap" />
+      </Principal>
+      <Dependent Role="SanPham">
+        <PropertyRef Name="MaNhaCungCap" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SieuThiNhoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="GiaoDiches" EntityType="Self.GiaoDich" />
+    <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
+    <EntitySet Name="NhaCungCaps" EntityType="Self.NhaCungCap" />
+    <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
+    <EntitySet Name="SanPhams" EntityType="Self.SanPham" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK__GiaoDich__MaKhac__46E78A0C" Association="Self.FK__GiaoDich__MaKhac__46E78A0C">
+      <End Role="KhachHang" EntitySet="KhachHangs" />
+      <End Role="GiaoDich" EntitySet="GiaoDiches" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GiaoDich__MaNhan__48CFD27E" Association="Self.FK__GiaoDich__MaNhan__48CFD27E">
+      <End Role="NhanVien" EntitySet="NhanViens" />
+      <End Role="GiaoDich" EntitySet="GiaoDiches" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GiaoDich__MaSanP__47DBAE45" Association="Self.FK__GiaoDich__MaSanP__47DBAE45">
+      <End Role="SanPham" EntitySet="SanPhams" />
+      <End Role="GiaoDich" EntitySet="GiaoDiches" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SanPham__MaNhaCu__440B1D61" Association="Self.FK__SanPham__MaNhaCu__440B1D61">
+      <End Role="NhaCungCap" EntitySet="NhaCungCaps" />
+      <End Role="SanPham" EntitySet="SanPhams" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

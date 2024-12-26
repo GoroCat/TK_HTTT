@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Quản Lý Siêu Thị";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #4B0082; /* Indigo */
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .section-title {
+            color: #4B0082; /* Indigo */
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            background-color: #E6E6FA; /* Lavender */
+            color: #4B0082; /* Indigo */
+            padding: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Quản Lý Siêu Thị ABC</h1>
+    </div>
+    <div class="container">
+        <h3 class="section-title">Danh Mục Quản Lý</h3>
+        <div class="list-group">
+            @Html.ActionLink("Quản Lý Sản Phẩm", "Index", "SanPhams", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+            @Html.ActionLink("Quản Lý Khách Hàng", "Index", "KhachHangs", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+            @Html.ActionLink("Quản Lý Giao Dịch", "Index", "GiaoDichs", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+            @Html.ActionLink("Quản Lý Nhà Cung Cấp", "Index", "NhaCungCaps", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+            @Html.ActionLink("Quản Lý Nhân Viên", "Index", "NhanViens", new { area = "" }, new { @class = "list-group-item list-group-item-action" })
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
